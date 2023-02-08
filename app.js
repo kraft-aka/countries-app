@@ -1,6 +1,10 @@
+// main url for all data
 const url = 'https://restcountries.com/v3.1/all'
+
+// placeholder div for output data
 const output = document.querySelector('.output')
 
+// fetches data from url
 const fetchData = async (endpoint) => {
   try {
 
@@ -16,10 +20,12 @@ const fetchData = async (endpoint) => {
   }
 };
 
+// displays raw data
 const getRawData = (data) => {
   output.textContent = JSON.stringify(data, undefined, 2)
 }
 
+// displays clean data
 const getAllData = (data) => {
   const list =[];
   let country;
@@ -37,5 +43,8 @@ const getAllData = (data) => {
   output.innerHTML = list.join('');
 
 }
+// TODO: 
+// add styles
+// add filter func and more search endpoints
 
 fetchData(url)
