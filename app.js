@@ -1,12 +1,11 @@
 const list = [];
 const rawJson = [];
-const btn = document.querySelector('.btn')
+const btn = document.querySelector(".btn");
 // main url for all data
-const url = 'https://restcountries.com/v3.1/all'
-
+const url = "https://restcountries.com/v3.1/all";
 
 // const searchByName = async() => {
-//   const name = document.querySelector('#input').value; 
+//   const name = document.querySelector('#input').value;
 //   console.log(name)
 //   const urlByName = `https://restcountries.com/v2/name/${name}?fullText=true`;
 //   try {
@@ -22,64 +21,75 @@ const url = 'https://restcountries.com/v3.1/all'
 //   }
 // }
 
-
 // placeholder div for output data
-const output = document.querySelector('.output')
+const output = document.querySelector(".output");
 
 // fetches data from url
 const fetchData = async (endpoint) => {
   try {
-
     const response = await fetch(endpoint);
-    if(response.ok) {
+    if (response.ok) {
       const responseJson = await response.json();
       //console.log(responseJson)
       // getRawData(responseJson)
-      getAllData(responseJson)
-      responseJson.forEach(item => rawJson.push(item))
+      getAllData(responseJson);
+      responseJson.forEach((item) => rawJson.push(item));
       //console.log(rawJson)
     }
-  } catch(err) {
-    console.log(err)
+  } catch (err) {
+    console.log(err);
   }
 };
 
 // displays raw data
 const getRawData = (data) => {
-  output.textContent = JSON.stringify(data, undefined, 2)
-}
+  output.textContent = JSON.stringify(data, undefined, 2);
+};
 
 // displays clean data
 const getAllData = (data) => {
-  let country;
-  data.forEach(item => {
-   country = `<div id="country-item">
-   <p>name: ${item.name.common}</p>
-   <p>area: ${item.area}km2</p>
-   <p>capital city: ${item.capital || ''}</p>
-   <p>timezone: ${item.timezones}</p>
-   <p>population: ${item.population}</p>
-   <img src='${item.flags.svg}' id="country-img" width="100px"/> 
-   </div>`
-   list.push(country)
-  })
-  output.innerHTML = list.join('');
-
-}
-// TODO: 
+  // let country;
+  // data.map(item => {
+  //  country = `<li id="country-item">
+  //  <p>name: <h2>${item.name.common}</h2></p>
+  //  <p>area: ${item.area}km2</p>
+  //  <p>capital city: ${item.capital || ''}</p>
+  //  <p>timezone: ${item.timezones}</p>
+  //  <p>population: ${item.population}</p>
+  //  <img src='${item.flags.svg}' id="country-img" width="100px"/>
+  //  </li>`
+  //  list.push(country)
+  // })
+  // output.innerHTML = list.join('');
+  const country = data
+    .map((item) => {
+      return `
+    <li id="country-item">
+      <h2>${item.name.common}</h2>
+      <p>area: ${item.area}km2</p>
+      <p>capital city: ${item.capital || ""}</p>
+      <p>timezone: ${item.timezones}</p>
+      <p>population: ${item.population}</p>
+      <img src='${item.flags.svg}' id="country-img" width="100px"/>  
+    <li>`;
+    })
+    .join("");
+  output.innerHTML = country;
+};
+// TODO:
 // add styles
 // fix filter function
 
 const searchCountryName = (e) => {
   const name = e.target.value.toLowerCase();
-  const filteredList = rawJson.filter((countryItem)=> {
-    console.log(countryItem.name.common.toLowerCase())
-    countryItem.name.common.toLowerCase().includes(name)
-  })
-  output.innerHTML = ''
- filteredList.forEach(item => getAllData(item))
-}
+  const filteredList = rawJson.filter((countryItem) => {
+    //console.log(countryItem.name.common.toLowerCase())
+    return countryItem.name.common.toLowerCase().includes(name); //|| countryItem.capital.toLowerCase().includes(name)
+  });
 
+  output.innerHTML = "";
+  getAllData(filteredList);
+};
 
-fetchData(url)
-document.getElementById('input').addEventListener('input', searchCountryName)
+fetchData(url);
+document.getElementById("input").addEventListener("input", searchCountryName);
