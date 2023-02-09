@@ -1,5 +1,27 @@
+const list = [];
+const rawJson = [];
+const btn = document.querySelector('.btn')
 // main url for all data
 const url = 'https://restcountries.com/v3.1/all'
+
+
+// const searchByName = async() => {
+//   const name = document.querySelector('#input').value; 
+//   console.log(name)
+//   const urlByName = `https://restcountries.com/v2/name/${name}?fullText=true`;
+//   try {
+//     //e.preventDefault;
+//     const response = await fetch(urlByName)
+//     if (response.ok) {
+//       const responseByName = await response.json();
+//       console.log(responseByName)
+//       getAllData(responseByName)
+//     }
+//   } catch(err) {
+//     console.log(err)
+//   }
+// }
+
 
 // placeholder div for output data
 const output = document.querySelector('.output')
@@ -11,9 +33,11 @@ const fetchData = async (endpoint) => {
     const response = await fetch(endpoint);
     if(response.ok) {
       const responseJson = await response.json();
-      console.log(responseJson)
+      //console.log(responseJson)
       // getRawData(responseJson)
       getAllData(responseJson)
+      responseJson.forEach(item => rawJson.push(item))
+      //console.log(rawJson)
     }
   } catch(err) {
     console.log(err)
@@ -27,7 +51,6 @@ const getRawData = (data) => {
 
 // displays clean data
 const getAllData = (data) => {
-  const list =[];
   let country;
   data.forEach(item => {
    country = `<div id="country-item">
@@ -45,6 +68,18 @@ const getAllData = (data) => {
 }
 // TODO: 
 // add styles
-// add filter func and more search endpoints
+// fix filter function
+
+const searchCountryName = (e) => {
+  const name = e.target.value.toLowerCase();
+  const filteredList = rawJson.filter((countryItem)=> {
+    console.log(countryItem.name.common.toLowerCase())
+    countryItem.name.common.toLowerCase().includes(name)
+  })
+  output.innerHTML = ''
+ filteredList.forEach(item => getAllData(item))
+}
+
 
 fetchData(url)
+document.getElementById('input').addEventListener('input', searchCountryName)
