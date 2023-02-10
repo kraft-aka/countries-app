@@ -30,7 +30,7 @@ const fetchData = async (endpoint) => {
     const response = await fetch(endpoint);
     if (response.ok) {
       const responseJson = await response.json();
-      //console.log(responseJson)
+      console.log(responseJson)
       // getRawData(responseJson)
       getAllData(responseJson);
       responseJson.forEach((item) => rawJson.push(item));
@@ -63,22 +63,31 @@ const getAllData = (data) => {
   // output.innerHTML = list.join('');
   const country = data
     .map((item) => {
+      // return `
+      // <div class="card bg-light mb-2"  style="max-width: 28rem;" id="card">
+      //   <div class="card-header text-center">${item.cioc || item.name.common}</div>
+      //   <div class="card-body">
+      //   <h5 class="card-title">${item.name.common}</h5>
+      //   <p class="card-text">capital city: <strong>${item.capital || ''}</strong></p>
+      //   <img src='${item.flags.svg}' id="country-img" width="100px"/>
+      //   </div>`
       return `
-    <li id="country-item">
+    <div id="country-item">
       <h2>${item.name.common}</h2>
       <p>area: ${item.area}km2</p>
       <p>capital city: ${item.capital || ""}</p>
       <p>timezone: ${item.timezones}</p>
       <p>population: ${item.population}</p>
       <img src='${item.flags.svg}' id="country-img" width="100px"/>  
-    <li>`;
+    <div>`;
     })
     .join("");
   output.innerHTML = country;
 };
 // TODO:
 // add styles
-// fix filter function
+// check getAllData function
+// create card function
 
 const searchCountryName = (e) => {
   const name = e.target.value.toLowerCase();
