@@ -13,26 +13,42 @@ body {
   color: #fff;
   font-family: 'Lato', sans-serif;
   font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
+header {
+  margin: 2em 0;
+  text-align: center;
+}
 input {
   width: 80%;
   height: 4em;
   margin: 2em 0;
   padding: .5em;
+
 }
 
 .output {
-  background-color: coral;
-  width: inherit;
+  width: 90%;
   height: 100vh;
-  display: flex;
-  overflow: auto;
+  /* display: flex;
+  justify-content: center;
+  flex-direction: column; */
+  margin: 2em auto;
+  overflow: scroll;
+  overflow-x: hidden;
+  padding: 5em;
 }
 
 #country-item {
-  width: 50%;
+  min-width: 50%;
   height: auto;
-  border: 1px red solid;
+  border: none;
+  border-radius: .5em;
+  padding: 2em 4.5em;
+  margin: 2em auto;
+  background-color: #400730de;
 }
 
