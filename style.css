@@ -16,18 +16,21 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  letter-spacing: .1em;
 }
 
 header {
   margin: 2em 0;
   text-align: center;
 }
-input {
-  width: 80%;
-  height: 4em;
-  margin: 2em 0;
-  padding: .5em;
 
+input {
+  width: 70%;
+  height: 4em;
+  padding: .5em;
+  position: relative;
+  left: 15%;
+  border-radius: .5em;
 }
 
 .output {
@@ -49,6 +52,39 @@ input {
   border-radius: .5em;
   padding: 2em 4.5em;
   margin: 2em auto;
-  background-color: #400730de;
+  background-color: #0e0e35de;
 }
 
+#country-item > *  {
+  margin: 1em;
+}
+
+#country-item  img  {
+  margin-left: 2em;
+}
+
+#country-item:hover {
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.15);
+}
+
+strong {
+  margin-left: 2em;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 2em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 1em;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: red;
+  border-radius: 1em;
+}

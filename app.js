@@ -53,11 +53,18 @@ const getAllData = (data) => {
       return `
     <div id="country-item">
       <h2>${item.name.common}</h2>
-      <p>area: ${item.area}km2</p>
-      <p>capital city: ${item.capital || ""}</p>
-      <p>timezone: ${item.timezones}</p>
-      <p>population: ${item.population}</p>
-      <img src='${item.flags.svg}' id="country-img" width="100px"/>  
+      <hr/>
+      <p>abbreviated: <strong>${item.cioc || item.name.common}</strong></p>
+      <p>continent: <strong>${item.continents}</strong></p>
+      <p>capital city: <strong> ${item.capital || ""}</strong></p>
+      <p>area: <strong>${item.area}</strong> km2</p>
+      <p>borders: <strong>${item.borders || 'no borders'}</strong></p>
+      <p>timezone: <strong> ${item.timezones[0]}</strong></p>
+      <p>population: <strong>${item.population}</strong></p>
+      <p>independent: <strong>${item.independent}</strong></p>
+      <p>flag: <img src='${item.flags.svg}' id="country-img" width="100px"/></p>
+      <p><a href="${item.maps.googleMaps}">search it in google maps</a></p>  
+      <button>more...</button>
     </div>`;
     })
     .join("");
