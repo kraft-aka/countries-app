@@ -4,23 +4,6 @@ const btn = document.querySelector(".btn");
 // main url for all data
 const url = "https://restcountries.com/v3.1/all";
 
-// const searchByName = async() => {
-//   const name = document.querySelector('#input').value;
-//   console.log(name)
-//   const urlByName = `https://restcountries.com/v2/name/${name}?fullText=true`;
-//   try {
-//     //e.preventDefault;
-//     const response = await fetch(urlByName)
-//     if (response.ok) {
-//       const responseByName = await response.json();
-//       console.log(responseByName)
-//       getAllData(responseByName)
-//     }
-//   } catch(err) {
-//     console.log(err)
-//   }
-// }
-
 // placeholder div for output data
 const output = document.querySelector(".output");
 
@@ -70,15 +53,10 @@ const getAllData = (data) => {
     .join("");
   output.innerHTML = country;
 };
-// TODO:
-// add styles
-// check getAllData function
-// create card function
 
 const searchCountryName = (e) => {
   const name = e.target.value.toLowerCase();
   const filteredList = rawJson.filter((countryItem) => {
-    //console.log(countryItem.name.common.toLowerCase())
     return countryItem.name.common.toLowerCase().includes(name); //|| countryItem.capital.toLowerCase().includes(name)
   });
 
