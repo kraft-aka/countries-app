@@ -40,10 +40,10 @@ const getAllData = (data) => {
       <p>abbreviated: <strong>${item.cioc || item.name.common}</strong></p>
       <p>continent: <strong>${item.continents}</strong></p>
       <p>capital city: <strong> ${item.capital || ""}</strong></p>
-      <p>area: <strong>${item.area}</strong> km2</p>
+      <p>area: <strong>${new Intl.NumberFormat().format(item.area)}</strong> km2</p>
       <p>borders: <strong>${item.borders || 'no borders'}</strong></p>
       <p>timezone: <strong> ${item.timezones[0]}</strong></p>
-      <p>population: <strong>${item.population}</strong></p>
+      <p>population: <strong>${new Intl.NumberFormat().format(item.population)}</strong></p>
       <p>independent: <strong>${item.independent}</strong></p>
       <p>flag: <img src='${item.flags.svg}' id="country-img" width="100px"/></p>
       <p><a href="${item.maps.googleMaps}">search it in google maps</a></p>  
@@ -66,3 +66,6 @@ const searchCountryName = (e) => {
 
 fetchData(url);
 document.getElementById("input").addEventListener("input", searchCountryName);
+
+
+//TODO --> create Modal for button, displaying ,mpre data about chosen country
