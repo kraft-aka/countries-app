@@ -1,6 +1,7 @@
 const list = [];
 const rawJson = [];
 const btn = document.querySelector(".btn");
+const lightModeBtnEl = document.querySelector('.light-mode');
 // main url for all data
 const url = "https://restcountries.com/v3.1/all";
 
@@ -63,9 +64,22 @@ const searchCountryName = (e) => {
   output.innerHTML = "";
   getAllData(filteredList);
 };
+const toggleMode = () => {
+  const body = document.body;
+  const countryItem = document.querySelector('#country-item') 
+  console.log(countryItem)
+  body.classList.toggle('light-mode--active')
+  output.classList.toggle('light-mode--active')
+  countryItem.classList.toggle('light-mode--active')
+}
 
 fetchData(url);
 document.getElementById("input").addEventListener("input", searchCountryName);
+
+lightModeBtnEl.addEventListener('click', (e)=>{
+  e.preventDefault();
+  toggleMode()
+})
 
 
 //TODO --> create Modal for button, displaying ,mpre data about chosen country
