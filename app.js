@@ -64,10 +64,11 @@ const searchCountryName = (e) => {
   output.innerHTML = "";
   getAllData(filteredList);
 };
+
+// toggles to light mode
 const toggleMode = () => {
   const body = document.body;
   const countryItem = document.querySelector('#country-item') 
-  console.log(countryItem)
   body.classList.toggle('light-mode--active')
   output.classList.toggle('light-mode--active')
   countryItem.classList.toggle('light-mode--active')
@@ -79,6 +80,11 @@ document.getElementById("input").addEventListener("input", searchCountryName);
 lightModeBtnEl.addEventListener('click', (e)=>{
   e.preventDefault();
   toggleMode()
+  if (output.classList.contains('light-mode--active')) {
+    lightModeBtnEl.textContent = 'dark mode'
+  } else {
+    lightModeBtnEl.textContent = 'light mode'
+  }
 })
 
 
